@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements
         startService(incrementWaterCountIntent);
     }
 
-    // COMPLETED (14) Create a method called testNotification that triggers NotificationUtils' remindUserBecauseCharging
     public void testNotification(View view) {
         NotificationUtils.remindUserBecauseCharging(this);
     }
