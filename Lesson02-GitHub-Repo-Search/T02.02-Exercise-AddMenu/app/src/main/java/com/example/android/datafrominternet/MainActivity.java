@@ -73,9 +73,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        Context context = MainActivity.this;
+
         switch (id) {
             case R.id.action_search:
-                Toast.makeText(this, "Search Menu clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Search Menu clicked", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 break;
