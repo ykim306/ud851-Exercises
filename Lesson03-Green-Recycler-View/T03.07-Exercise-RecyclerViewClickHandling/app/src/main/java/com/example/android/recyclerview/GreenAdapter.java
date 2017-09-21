@@ -42,7 +42,7 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
     // COMPLETED (3) Create a final private ListItemClickListener called mOnClickListener
     private final ListItemClickListener mListItemClickListener;
 
-    /*
+    /**
      * The number of ViewHolders that have been created. Typically, you can figure out how many
      * there should be by determining how many list items fit on your screen at once and add 2 to 4
      * to that number. That isn't the exact formula, but will give you an idea of how many
