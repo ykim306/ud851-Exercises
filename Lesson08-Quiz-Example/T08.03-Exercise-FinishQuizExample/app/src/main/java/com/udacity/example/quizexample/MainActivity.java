@@ -16,9 +16,7 @@
 
 package com.udacity.example.quizexample;
 
-import android.content.ContentResolver;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -31,7 +29,7 @@ import com.udacity.example.droidtermsprovider.DroidTermsExampleContract;
  * Gets the data from the ContentProvider and shows a series of flash cards.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WordFetchTask.IWordFetchListener {
 
     // The data from the DroidTermsExample content provider
     private Cursor mData;
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mWordTextView;
     private TextView mDefinitionTextView;
 
-    private int mWordColum;
+    private int mWordColumn;
     private int mDefColumn;
 
     // This state is when the word definition is hidden and clicking the button will therefore
@@ -53,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     // This state is when the word definition is shown and clicking the button will therefore
     // advance the app to the next word
     private final int STATE_SHOWN = 1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         mDefinitionTextView = (TextView) findViewById(R.id.text_view_definition);
 
         //Run the database operation to get the cursor off of the main thread
-        new WordFetchTask().execute();
+        new WordFetchTask(this).execute();
 
     }
 
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             mDefinitionTextView.setVisibility(View.INVISIBLE);
             mButton.setText(getString(R.string.show_definition));
 
-            mWordTextView.setText(mData.getString(mWordColum));
+            mWordTextView.setText(mData.getString(mWordColumn));
             mDefinitionTextView.setText(mData.getString(mDefColumn));
 
             mCurrentState = STATE_HIDDEN;
@@ -133,42 +130,50 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         // COMPLETED (5) Remember to close your cursor!
-        mData.close();;
+        mData.close();
+    }
+
+    @Override
+    public void OnWordFetchComplete(Cursor data) {
+        mData = data;
+        mWordColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD);
+        mDefColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION);
+        nextWord();
     }
 
     // Use an async task to do the data fetch off of the main thread.
-    public class WordFetchTask extends AsyncTask<Void, Void, Cursor> {
-
-        // Invoked on a background thread
-        @Override
-        protected Cursor doInBackground(Void... params) {
-            // Make the query to get the data
-
-            // Get the content resolver
-            ContentResolver resolver = getContentResolver();
-
-            // Call the query method on the resolver with the correct Uri from the contract class
-            Cursor cursor = resolver.query(DroidTermsExampleContract.CONTENT_URI,
-                    null, null, null, null);
-            return cursor;
-        }
-
-
-        // Invoked on UI thread
-        @Override
-        protected void onPostExecute(Cursor cursor) {
-            super.onPostExecute(cursor);
-
-            // Set the data for MainActivity
-            mData = cursor;
-
-            // COMPLETED (2) Initialize anything that you need the cursor for, such as setting up
-            // the screen with the first word and setting any other instance variables
-            mWordColum = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD);
-            mDefColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION);
-
-            nextWord();
-        }
-    }
+//    public class WordFetchTask extends AsyncTask<Void, Void, Cursor> {
+//
+//        // Invoked on a background thread
+//        @Override
+//        protected Cursor doInBackground(Void... params) {
+//            // Make the query to get the data
+//
+//            // Get the content resolver
+//            ContentResolver resolver = getContentResolver();
+//
+//            // Call the query method on the resolver with the correct Uri from the contract class
+//            Cursor cursor = resolver.query(DroidTermsExampleContract.CONTENT_URI,
+//                    null, null, null, null);
+//            return cursor;
+//        }
+//
+//
+//        // Invoked on UI thread
+//        @Override
+//        protected void onPostExecute(Cursor cursor) {
+//            super.onPostExecute(cursor);
+//
+//            // Set the data for MainActivity
+//            mData = cursor;
+//
+//            // COMPLETED (2) Initialize anything that you need the cursor for, such as setting up
+//            // the screen with the first word and setting any other instance variables
+//            mWordColum = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD);
+//            mDefColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION);
+//
+//            nextWord();
+//        }
+//    }
 
 }
