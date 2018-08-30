@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 
 import com.udacity.example.droidtermsprovider.DroidTermsExampleContract;
 
+import java.lang.ref.WeakReference;
+
 public class WordFetchTask extends AsyncTask<Void, Void, Cursor> {
 
     public interface IWordFetchListener {
@@ -14,13 +16,13 @@ public class WordFetchTask extends AsyncTask<Void, Void, Cursor> {
     }
 
     private IWordFetchListener wordFetchListener;
-    private Context context;
+    private WeakReference<Context> contextReference;
 
     public WordFetchTask(IWordFetchListener wordFetchListener){
         this.wordFetchListener = wordFetchListener;
 
         if (wordFetchListener instanceof Context) {
-            context = (Context) wordFetchListener;
+            contextReference = new WeakReference<>((Context)wordFetchListener);
         }
     }
 
@@ -29,7 +31,7 @@ public class WordFetchTask extends AsyncTask<Void, Void, Cursor> {
         // Make the query to get the data
 
             // Get the content resolver
-            ContentResolver resolver = context.getContentResolver();
+            ContentResolver resolver = contextReference.get().getContentResolver();
 
             // Call the query method on the resolver with the correct Uri from the contract class
             Cursor cursor = resolver.query(DroidTermsExampleContract.CONTENT_URI,
