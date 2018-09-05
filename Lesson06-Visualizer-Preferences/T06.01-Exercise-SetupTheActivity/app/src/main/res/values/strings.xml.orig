@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Visualize</string>
+
+<<<<<<< HEAD
+
+=======
+    <!-- TODO (4) Add string for Settings -->
+    
+>>>>>>> upstream/student
+    <!-- - - - - - - - - - - - - - - -
+          - Used by Preferences  -
+          - - - - - - - - - - - - - - - -->
+
+    <!-- Value in SharedPreferences for red color option -->
+    <string name="pref_color_red_value" translatable="false">red</string>
+
+    <!-- Value in SharedPreferences for blue color option -->
+    <string name="pref_color_blue_value" translatable="false">blue</string>
+
+    <!-- Value in SharedPreferences for green color option -->
+    <string name="pref_color_green_value" translatable="false">green</string>
+<<<<<<< HEAD
+
+    <!-- COMPLETED (4) Add string for Settings -->
+    <string name="setting">Settings</string>
+=======
+>>>>>>> upstream/student
+</resources>

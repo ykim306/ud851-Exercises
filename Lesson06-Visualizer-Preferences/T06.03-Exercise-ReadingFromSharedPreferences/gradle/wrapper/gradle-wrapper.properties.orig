@@ -1,0 +1,14 @@
+<<<<<<< HEAD
+#Mon Jul 30 00:30:23 EDT 2018
+=======
+#Fri Jan 13 11:33:58 PST 2017
+>>>>>>> upstream/student
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+<<<<<<< HEAD
+distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
+=======
+distributionUrl=https\://services.gradle.org/distributions/gradle-3.3-all.zip
+>>>>>>> upstream/student
