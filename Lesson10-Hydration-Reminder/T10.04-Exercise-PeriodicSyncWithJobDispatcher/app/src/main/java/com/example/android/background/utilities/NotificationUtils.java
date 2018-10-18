@@ -54,8 +54,8 @@ public class NotificationUtils {
      * This notification channel id is used to link notifications to this channel
      */
     private static final String WATER_REMINDER_NOTIFICATION_CHANNEL_ID = "reminder_notification_channel";
-    private static final int ACTION_DRINK_PENDING_INTENT_ID = 1;
-    private static final int ACTION_IGNORE_PENDING_INTENT_ID = 14;
+    private static final int ACTION_DRINK_PENDING_INTENT_ID = 1139;
+    private static final int ACTION_IGNORE_PENDING_INTENT_ID = 1140;
 
     public static void clearAllNotifications(Context context) {
         NotificationManager notificationManager = (NotificationManager)
