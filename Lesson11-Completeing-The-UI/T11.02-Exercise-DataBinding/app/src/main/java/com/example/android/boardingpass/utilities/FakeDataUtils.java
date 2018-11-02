@@ -40,14 +40,14 @@ public class FakeDataUtils {
         bpi.originCode = "JFK";
         bpi.destCode = "DCA";
 
-        long now = System.currentTimeMillis();
+        long now = System.currentTimeMillis() + minutesToMillis(1);
 
         // Anything from 0 minutes up to (but not including) 30 minutes
         long randomMinutesUntilBoarding = (long) (Math.random() * 30);
         // Standard 40 minute boarding time
         long totalBoardingMinutes = 40;
         // Anything from 1 hours up to (but not including) 6 hours
-        long randomFlightLengthHours = (long) (Math.random() * 5 + 1);
+        long randomFlightLengthHours = (long) (Math.random() * 5) + 1;
 
         long boardingMillis = now + minutesToMillis(randomMinutesUntilBoarding);
         long departure = boardingMillis + minutesToMillis(totalBoardingMinutes);
